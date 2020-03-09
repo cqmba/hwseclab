@@ -28,11 +28,11 @@ always @(posedge clk)
 begin
 
 	if(rst) begin
-		cur_state 	<= `STATE_START;
-		rdy			<= 1'b0;
-		dout		<= 1'b1;
-		shift_amount <= 0;
-		wait_counter <= 0;
+		cur_state 		<= `STATE_START;
+		rdy				<= 1'b0;
+		dout			<= 1'b1;
+		shift_amount 	<= 0;
+		wait_counter 	<= 0;
 	end else begin
 		rdy  <= 1'b0;
 		dout <= dout;

@@ -6,9 +6,9 @@ reg tb_clk, tb_rst, tb_en;
 wire [1:0] state_out_dbg;
 reg [7:0] tb_data;
 
-`define SYSTEM_CLOCK 	32e6
+`define SYSTEM_CLOCK 	32000000
 `define BAUD_RATE 		9600
-
+`define CYC_COUNT		`SYSTEM_CLOCK/`BAUD_RATE
 
 uart_tx 
 	#(
@@ -42,7 +42,7 @@ initial begin
 end
 
 initial begin 
-#80 tb_data <= 8'h03;
+#80 tb_data <= 8'h55;
 #100 tb_en <= 1'b1;
 #100 tb_en <= 1'b0;
 end 
@@ -56,7 +56,7 @@ $dumpvars(0,tb_en);
 $dumpvars(0,tb_data);
 $dumpvars(0,tx_dout);
 $dumpvars(0,state_out_dbg);
-#333*333 $finish;
+#(`CYC_COUNT*15*10) $finish;
 end
 
 
