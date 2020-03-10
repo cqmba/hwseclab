@@ -11,7 +11,7 @@ parameter BAUD_RATE		= 9600;
 wire rdy,valid;
 
 wire [7:0] data;
-reg en;
+reg en = 0;
 
 
 uart_tx 
@@ -44,16 +44,13 @@ uart_rx
 // GLUE LOGIC
 //assign en = rdy & valid;
 
-reg old_valid;
-reg triggered;
+reg triggered = 0;
 
 always @(posedge clk) 
 begin
 	if(rst) begin
-		//ld_valid <= 0;
 		triggered <= 0;
 	end else begin
-		//old_valid <= valid;
 		en <= 1'b0;
 		if ( !triggered & valid & rdy ) begin
 			en <= 1'b1;

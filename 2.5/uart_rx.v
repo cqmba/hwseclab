@@ -2,8 +2,8 @@ module uart_rx (
 	input wire clk,
 	input wire rst,
 	input wire din,
-	output reg valid,
-	output [7:0] data_rx);
+	output reg valid = 0,
+	output [7:0] data_rx );
 
 parameter SYSTEM_CLOCK  = 32000000;
 parameter BAUD_RATE		= 9600;
@@ -15,10 +15,10 @@ parameter CYC_BIT_WIDTH	= $clog2(CYC_COUNT);
 `define STATE_READ_BIT		2'b10
 
 
-reg [1:0] state;
-reg [CYC_BIT_WIDTH:0]	counter;
-reg [3:0]  bit_counter;
-reg [8:0] data;
+reg [1:0] state = `STATE_START;
+reg [CYC_BIT_WIDTH:0]	counter=0;
+reg [3:0]  bit_counter=0;
+reg [8:0] data=0;
 
 assign data_rx = data [7:0];
 

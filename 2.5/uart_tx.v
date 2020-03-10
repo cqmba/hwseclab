@@ -17,10 +17,10 @@ parameter CYC_PRO_BIT	= $clog2(CYC_COUNT);
 `define STATE_SENDBIT	2'b10
 
 
-reg [1:0]cur_state ;
-reg [9:0]data ;
-reg [3:0]shift_amount ;
-reg [CYC_PRO_BIT:0]wait_counter ;
+reg [1:0]cur_state = `STATE_START;
+reg [9:0]data = 0;
+reg [3:0]shift_amount = 0;
+reg [CYC_PRO_BIT:0]wait_counter = 0 ;
 
 assign state_out_dbg = cur_state ;
 
