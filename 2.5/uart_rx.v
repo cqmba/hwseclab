@@ -32,9 +32,9 @@ begin
 	end else begin
 		case (state)
 			`STATE_START: begin
+				valid <= 0;
 				if (din == 0) begin
 					if (counter == CYC_HALFCOUNT) begin
-						valid <= 0;
 						state <= `STATE_READ_BIT;
 						counter <= 0;
 						bit_counter <= 0;
