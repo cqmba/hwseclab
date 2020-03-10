@@ -10,18 +10,18 @@ module uart_mitm(
 
 	input pc_rx_bus,
 	output pc_tx_bus,
+
+	// debug
+output [7:0] b1_rx_data,
+output [7:0] b2_rx_data,
+output [7:0] pc_rx_data,
+output b1_rx_valid,
+output b2_rx_valid,
+output pc_rx_valid
 );
 
 parameter SYSTEM_CLOCK  = 32000000;
 parameter BAUD_RATE		= 9600;
-
-wire [7:0] b1_rx_data;
-wire [7:0] b2_rx_data;
-wire [7:0] pc_rx_data;
-
-wire b1_rx_valid;
-wire b2_rx_valid;
-wire pc_rx_valid;
 
 wire b1_tx_rdy;
 wire b2_tx_rdy;
@@ -104,6 +104,7 @@ uart_rx
 
 
 always @(posedge clk) begin
+	pc_override <= pc_override;
 	if (pc_rx_valid) begin
 		if( pc_rx_data == `BYTE_ENABLEOVERRIDE) begin // 'e'
 			pc_override <= 1'b1;
@@ -149,4 +150,3 @@ endmodule
 //	end
 //end
 
-endmodule
