@@ -9,19 +9,20 @@ module uart_mitm(
 	output b2_tx_bus,
 
 	input pc_rx_bus,
-	output pc_tx_bus,
+	output pc_tx_bus
 
-	// debug
-output [7:0] b1_rx_data,
-output [7:0] b2_rx_data,
-output [7:0] pc_rx_data,
-output b1_rx_valid,
-output b2_rx_valid,
-output pc_rx_valid
 );
 
 parameter SYSTEM_CLOCK  = 32000000;
 parameter BAUD_RATE		= 9600;
+
+wire [7:0] b1_rx_data;
+wire [7:0] b2_rx_data;
+wire [7:0] pc_rx_data;
+
+wire b1_rx_valid;
+wire b2_rx_valid;
+wire pc_rx_valid;
 
 wire b1_tx_rdy;
 wire b2_tx_rdy;

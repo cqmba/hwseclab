@@ -3,8 +3,7 @@ module uart_tx(
 	input [7:0] data_in,
 
 	output reg rdy,
-	output reg dout = 1'b1,
-	output [1:0] state_out_dbg
+	output reg dout = 1'b1
 );
 
 parameter SYSTEM_CLOCK  = 32000000;
@@ -21,8 +20,6 @@ reg [1:0]cur_state = `STATE_START;
 reg [9:0]data = 0;
 reg [3:0]shift_amount = 0;
 reg [CYC_PRO_BIT:0]wait_counter = 0 ;
-
-assign state_out_dbg = cur_state ;
 
 always @(posedge clk)
 begin
