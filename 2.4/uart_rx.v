@@ -32,7 +32,6 @@ begin
 	end else begin
 		case (state)
 			`STATE_START: begin
-				//old_din <= din;
 				if (din == 0) begin
 					if (counter == CYC_HALFCOUNT) begin
 						valid <= 0;
