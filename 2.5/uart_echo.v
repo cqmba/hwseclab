@@ -13,7 +13,6 @@ wire rdy,valid;
 wire [7:0] data;
 wire en;
 
-
 uart_tx 
 	#(
 		.SYSTEM_CLOCK(SYSTEM_CLOCK), 
@@ -30,8 +29,8 @@ uart_tx
 
 uart_rx
 	#(
-		.SYSTEM_CLOCK(`SYSTEM_CLOCK), 
-		.BAUD_RATE(`BAUD_RATE)
+		.SYSTEM_CLOCK(SYSTEM_CLOCK), 
+		.BAUD_RATE(BAUD_RATE)
 	)
 	echo_rx(
 		.clk(clk),
