@@ -28,6 +28,8 @@ wire b1_tx_rdy;
 wire b2_tx_rdy;
 wire pc_tx_rdy;
 
+wire b1_tx_delay_bus;
+
 reg pc_override = 0;
 
 `define BYTE_ENABLEOVERRIDE		8'h65 // 'e'
@@ -73,6 +75,17 @@ uart_tx
 		.en (b1_tx_rdy & (pc_override ? pc_rx_valid : b2_rx_valid) ), // TODO
 		.data_in(pc_override ? pc_rx_data : b2_rx_data),
 		.rdy(b1_tx_rdy),
+		.dout(b1_tx_delay_bus)
+	);
+
+uart_delay 
+	#(
+		.SYSTEM_CLOCK(SYSTEM_CLOCK), 
+		.BAUD_RATE(BAUD_RATE)
+	)
+	b1_delay(
+		.clk(clk),
+		.din(b1_tx_delay_bus),
 		.dout(b1_tx_bus)
 	);
 
